@@ -5,7 +5,7 @@ on:
     branches: ['mini']
     tags:
     - '*'
-    
+
 env:
   IMAGE_NAME: ${{ github.repository }}
 
@@ -25,11 +25,11 @@ jobs:
 
       - name: Get Id
         id: mId
-        run: echo "::set-output name=id::$(grep "^id=" module.prop|cut -d'=' -f2)"
+        run: echo "id=$(grep "^id=" module.prop|cut -d'=' -f2)" >> $GITHUB_OUTPUT
         
       - name: Get Version
         id: mVersion
-        run: echo "::set-output name=version::$(grep "^version=" module.prop|cut -d'=' -f2)"
+        run: echo "version=$(grep "^version=" module.prop|cut -d'=' -f2)" >> $GITHUB_OUTPUT
 
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: zip -r "${{ steps.mId.outputs.id }}.${{ steps.mVersion.outputs.version }}.zip" . -x "README.md" ".git/*" ".github/*" 
