@@ -29,9 +29,17 @@ jobs:
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: zip -r "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip" . -x "README.md" ".git/*" ".github/*" 
 
+      - uses: rickstaa/action-create-tag@v1
+        id: tId
+        with:
+          tag: "${{ steps.mVersion.outputs.version }}"
+          tag_exists_error: false
+          message: "${{ steps.mVersion.outputs.version }} release"
+
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
+          tag: ${{ steps.tId.outputs.tag }}
           omitBody : "true"
         
       - name: Upload Release Asset
