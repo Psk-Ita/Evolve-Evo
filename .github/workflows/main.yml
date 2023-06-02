@@ -12,8 +12,11 @@ jobs:
     name: Upload Asset
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
+      pull-requests: write
+      repository-projects: write
+
     steps:          
       - name: Checkout repository
         uses: actions/checkout@v3
