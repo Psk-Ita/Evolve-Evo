@@ -3,6 +3,8 @@ name: Build Module
 on:
   push:
     branches: ['mini']
+    tags:
+    - '*'
 
 env:
   IMAGE_NAME: ${{ github.repository }}
@@ -32,16 +34,20 @@ jobs:
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: zip -r "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip" . -x "README.md" ".git/*" ".github/*" 
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1
         with:
-          draft: false
-          prerelease: false
-          tag_name: ${{ github.ref }}
-          release_name: Release v${{ steps.mVersion.outputs.version }}
+          artifacts: "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
+          # bodyFile: "body.md"
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          draft: false
+#          prerelease: false
+#          tag_name: ${{ github.ref }}
+#          release_name: Release v${{ steps.mVersion.outputs.version }}
           
       - name: Upload Release Asset
         id: upload-release-asset 
