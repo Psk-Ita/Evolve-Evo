@@ -41,7 +41,7 @@ jobs:
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
+          artifacts: "${{ steps.tId.outputs.tag }}"
           omitBody : true
         
       - name: Upload Release Asset
