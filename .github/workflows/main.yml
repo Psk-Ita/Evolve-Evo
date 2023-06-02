@@ -33,7 +33,6 @@ jobs:
         with:
           artifacts: "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
           omitBody : "true"
-          tag: ${{ steps.mVersion.outputs.version }}
         
       - name: Upload Release Asset
         id: upload-release-asset 
