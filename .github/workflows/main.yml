@@ -3,8 +3,8 @@ name: Build Module
 on:
   push:
     branches: ['master']
-    tags:
-    - '*'
+    tags: ['*']
+
 
 env:
   IMAGE_NAME: ${{ github.repository }}
