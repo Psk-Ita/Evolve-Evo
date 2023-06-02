@@ -34,7 +34,7 @@ jobs:
         run: zip -r "${{ steps.mId.outputs.id }}.${{ steps.mVersion.outputs.version }}.zip" . -x "README.md" ".git/*" ".github/*" 
 
       - uses: ncipollo/release-action@v1
-      - name: Upload Release
+        name: Upload Release
         with:
           artifacts: "${{ steps.mId.outputs.id }}.${{ steps.mVersion.outputs.version }}.zip"
           tag: ${{ steps.mVersion.outputs.version }}
