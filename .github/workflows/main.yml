@@ -6,9 +6,6 @@ on:
 
 env:
   IMAGE_NAME: ${{ github.repository }}
-  OCTOPUS_API_KEY: ${{ secrets.API_KEY  }}
-  OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
-  OCTOPUS_SPACE: 'Outer Space'
 
 jobs:
   build:
@@ -32,13 +29,16 @@ jobs:
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: zip -r "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip" . -x "README.md" ".git/*" ".github/*" 
 
-      - name: Create a release in Octopus Deploy 🐙
-        uses: OctopusDeploy/create-release-action@v3
+      - name: Instana Release
+        # You may pin to the exact commit or the version.
+        # uses: taimos/github-action-instana-release@965e6df38ba41009380ba095b82b33e749d37867
+        uses: taimos/github-action-instana-release@v3
         with:
-          project: 'MyProject'
-          git_ref: ${{ (github.ref_type == 'tag' && github.event.repository.default_branch ) || (github.head_ref || github.ref) }}
-          git_commit: ${{ github.event.after || github.event.pull_request.head.sha }}
-
+          # Name of the release
+          releaseName: "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
+          # Scope of the release
+          # releaseScope: # optional, default is {}
+    
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
