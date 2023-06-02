@@ -36,8 +36,8 @@ jobs:
         id: tId
         with:
           tag: "${{ steps.mVersion.outputs.version }}"
-          tag_exists_error: false
           message: "${{ steps.mVersion.outputs.version }} release"
+          force_push_tag : true
 
       - uses: ncipollo/release-action@v1
         with:
