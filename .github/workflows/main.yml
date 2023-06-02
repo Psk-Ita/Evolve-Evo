@@ -38,6 +38,4 @@ jobs:
         with:
           artifacts: "${{ steps.mId.outputs.id }}.${{ steps.mVersion.outputs.version }}.zip"
           tag: ${{ steps.mVersion.outputs.version }}
-          removeArtifacts : true
-#          replacesArtifacts : true
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
