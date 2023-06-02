@@ -11,7 +11,7 @@ env:
 
 jobs:
   build:
-    name: Upload Asset
+    name: Build Module
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -31,7 +31,7 @@ jobs:
         id: mVersion
         run: echo "version=$(grep "^version=" module.prop|cut -d'=' -f2)" >> $GITHUB_OUTPUT
 
-      - name: Build project # This would actually build your project, using zip for an example artifact
+      - name: Build project
         run: zip -r "${{ steps.mId.outputs.id }}.${{ steps.mVersion.outputs.version }}.zip" . -x "README.md" ".git/*" ".github/*" 
 
       - uses: ncipollo/release-action@v1
