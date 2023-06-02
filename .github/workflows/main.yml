@@ -2,9 +2,10 @@ name: Build Module
 
 on:
   push:
-    tags: -'*'
     branches: ['master']
-
+    tags:
+    - '*'
+    
 env:
   IMAGE_NAME: ${{ github.repository }}
 
