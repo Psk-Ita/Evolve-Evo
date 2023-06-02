@@ -37,7 +37,8 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
-          tag: "${{ steps.mVersion.outputs.version }}"
+          tag: ${{ steps.mVersion.outputs.version }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           # bodyFile: "body.md"
 #      - name: Create Release
 #        id: create_release
