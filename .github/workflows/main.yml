@@ -42,6 +42,7 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "${{ steps.tId.outputs.tag }}"
+          tag: "${{ steps.tId.outputs.tag }}"
           commit: "main"
           bodyFile : "./${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
         
