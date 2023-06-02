@@ -2,17 +2,21 @@ name: Build Module
 
 on:
   push:
-    branches:
-    - master
+    branches: ['mini']
+
+env:
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
     name: Upload Asset
     runs-on: ubuntu-latest
-    steps:
-          
-      - name: Checkout Repo
-        uses: actions/checkout@v2
+    permissions:
+      contents: read
+      packages: write
+    steps:          
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Get Id
         id: mId
