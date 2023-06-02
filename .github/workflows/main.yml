@@ -2,7 +2,7 @@ name: Build Module
 
 on:
   push:
-    branches: ['mini']
+    branches: ['master']
     tags:
     - '*'
 
@@ -38,4 +38,3 @@ jobs:
         with:
           artifacts: "${{ steps.mId.outputs.id }}.${{ steps.mVersion.outputs.version }}.zip"
           tag: ${{ steps.mVersion.outputs.version }}
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
