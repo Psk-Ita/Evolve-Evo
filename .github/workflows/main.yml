@@ -35,7 +35,7 @@ jobs:
         uses: taimos/github-action-instana-release@v3
         with:
           # Name of the release
-          releaseName: "${{ steps.mId.outputs.id }}.v${{ steps.mVersion.outputs.version }}.zip"
+          releaseName: "${{ steps.mVersion.outputs.version }}"
           # Scope of the release
           # releaseScope: # optional, default is {}
     
